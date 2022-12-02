@@ -1,5 +1,5 @@
 # avent-of-code-2022
-- java 17 required
+- developed using java 17
 ## Day 1
 ### https://adventofcode.com/2022/day/1
 
