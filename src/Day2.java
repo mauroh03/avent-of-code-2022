@@ -43,6 +43,7 @@ public class Day2 {
         pointTable.put("C Z", (3 + 3));
 
         part1(strategy, pointTable);
+        part2(strategy, pointTable);
     }
 
     public static void part1(List<String> strategy, HashMap<String, Integer> pointTable) {
@@ -53,5 +54,55 @@ public class Day2 {
         }
 
         System.out.println("Part1 final score: " + score);
+    }
+
+    public static void part2(List<String> strategy, HashMap<String, Integer> pointTable) {
+        Integer score = 0;
+        HashMap<String, String> winners = new HashMap<>();
+        HashMap<String, String> loosers = new HashMap<>();
+        HashMap<String, String> draws = new HashMap<>();
+
+        /*
+         * Winners
+         * A Y
+         * B Z
+         * C X
+         */
+        winners.put("A", "A Y");
+        winners.put("B", "B Z");
+        winners.put("C", "C X");
+        /* Losers
+         * A Z
+         * B X
+         * C Y
+         */
+        loosers.put("A", "A Z");
+        loosers.put("B", "B X");
+        loosers.put("C", "C Y");
+        /* Draws
+         * A X
+         * B Y
+         * C Z
+         * */
+        draws.put("A", "A X");
+        draws.put("B", "B Y");
+        draws.put("C", "C Z");
+
+        for(String play: strategy) {
+            String move = "";
+            switch (String.valueOf(play.charAt(play.length() - 1))) {
+                case "X":
+                    move = loosers.get(play.substring(0, 1));
+                    break;
+                case "Y":
+                    move = draws.get(play.substring(0, 1));
+                    break;
+                case "Z":
+                    move = winners.get(play.substring(0, 1));
+            }
+            score += pointTable.get(move);
+        }
+
+        System.out.println("Part2 final score: " + score);
     }
 }
